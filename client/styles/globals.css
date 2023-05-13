@@ -25,3 +25,12 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+* { padding: 0; margin: 0; }
+html, body, #fullheight {
+    min-height: 100% !important;
+    height: 100%;
+}
+#fullheight {
+    width: 250px;
+    background: blue;
+}

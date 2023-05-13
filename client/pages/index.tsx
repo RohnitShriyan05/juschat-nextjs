@@ -1,23 +1,25 @@
 import React from "react";
 import SignIn from "../components/LogIn/SignIn";
 import HomePg from "../components/Home/Home";
-import { useState } from 'react'
-interface User {
-    name: string,
-    profilepic : string
+import { useState } from "react";
+interface Props {
+  user: {
+    name: string;
+    profilepic: string;
+  };
+  setUser: React.Dispatch<React.SetStateAction<any>>;
 }
 
-const Home:React.FC = ()=>{
-    const [user, setUser] = useState<User|null>();
-    return(
-        <div className="">
-            {
-                user ?
-                <HomePg user={user} setUser={setUser}/>:
-                <SignIn setUser={setUser}/>
-            }
-        </div>
-    );
-}
+const Home = (props: Props) => {
+  return (
+    <div className="">
+      <HomePg
+        user={props.user}
+        setUser={props.setUser}
+      />
+      :
+    </div>
+  );
+};
 
 export default Home;

@@ -3,7 +3,6 @@ const channelSchema = new mongoose.Schema({
   channelName:
     {
       type: String,
-      unique: true,
     },
 });
 const serverSchema = new mongoose.Schema({
@@ -12,13 +11,15 @@ const serverSchema = new mongoose.Schema({
     required: true,
     unique: true,
   },
+  description:{
+    type:String
+  },
   displayImage: {
-    type: Buffer,
+    type: String,
     required:true
   },
   owner: {
     type: String,
-    ref: "User",
     required:true
   },
   members: [{

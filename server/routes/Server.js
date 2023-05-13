@@ -11,8 +11,15 @@ router.get("/", async(req,res)=>{
     }
 })
 router.post("/new", async (req, res)=>{
+    const {name, owner, description, imgLink} = req.body;
     const newServer = await ServerData.create({
-        name:res.body.name,
+        name:name,
+        owner:owner,
+        description:description,
+        displayImage:imgLink,
+        channels:{
+            channelName:"General"
+        }
     })
     res.send(newServer);
 })
