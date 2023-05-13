@@ -4,30 +4,44 @@ import { GiJusticeStar } from "react-icons/gi";
 import React from "react";
 import { useEffect, useState } from "react";
 type Props = {
+  user: {
+    name: string;
+    profilepic: string;
+    email: string;
+  }|undefined;
   setUser: React.Dispatch<React.SetStateAction<any>>;
 };
 
-const SignIn: React.FC<Props> = ({ setUser }) => {
+const SignIn: React.FC<Props> = ({ setUser, user }) => {
   const [loading, setLoading] = useState<Boolean>(true);
-  const signIn = () => {
+  const signIn = (e:any) => {
+    e.preventDefault();
+    setLoading(true);
     auth
       .signInWithPopup(provider)
       .then((res) => {
         setUser({
           name: res.user?.displayName,
           profilepic: res.user?.photoURL,
+          email: res.user?.email,
         });
+        setLoading(false);
       })
       .catch((error) => alert(error.message));
   };
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      setUser({
-        name: user?.displayName,
-        profilepic: user?.photoURL,
-      });
-      setLoading(false);
+      if (user) {
+        setUser({
+          name: user?.displayName,
+          profilepic: user?.photoURL,
+        });
+        setLoading(false);
+      }
+      else{
+        setLoading(false);
+      }
     });
   }, [setUser]);
 
@@ -59,7 +73,7 @@ const SignIn: React.FC<Props> = ({ setUser }) => {
     <div className="h-screen w-full flex flex-col items-center justify-center text-white bg-SignInBg bg-no-repeat bg-center bg-cover">
       <div className="h-max flex flex-col items-center justify-center px-5vw py-8vh rounded-lg drop-shadow-2xl bg-primary">
         <h1 className="text-5xl pb-2 logo flex">
-          <GiJusticeStar className="mr-1 text-green-500" />
+          <GiJusticeStar className="mr-1 text-emerald-400" />
           JusChat
         </h1>
         <button

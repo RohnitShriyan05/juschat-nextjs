@@ -6,6 +6,7 @@ interface Props {
   user: {
     name: string;
     profilepic: string;
+    email:string;
   };
   setUser: React.Dispatch<React.SetStateAction<any>>;
 }
@@ -17,7 +18,6 @@ const Home = (props: Props) => {
         user={props.user}
         setUser={props.setUser}
       />
-      :
     </div>
   );
 };

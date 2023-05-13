@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { GiJusticeStar } from "react-icons/gi";
-import {IoMdAddCircle} from "react-icons/io";
+import {IoMdAdd,IoMdCompass} from "react-icons/io";
 
 import Axios from "axios";
 import { useEffect } from "react";
@@ -18,9 +18,9 @@ const ServerList: React.FC = () => {
         <div className="w-10 h-10 rounded-full bg-red-100 my-2" />
         <div className="w-10 h-10 rounded-full bg-red-100 my-2" />
         <div className="w-10 h-10 rounded-full bg-red-100 my-2" />
-        <Link href="/Explore"><AiOutlineSearch className="w-8 h-8 my-4 text-neutral-300 hover:text-white rounded-full "/></Link>
+        <Link href="/Explore"><IoMdCompass className="w-10 h-10 my-4 text-emerald-400  hover:text-white rounded-full "/></Link>
       </div>
-      <Link href="/CreateServer"><IoMdAddCircle className="w-12 h-12 text-neutral-300 hover:text-white"/></Link>
+      <Link href="/CreateServer"><IoMdAdd className="w-10 h-10 p-1 text-emerald-400 bg-primary rounded-full hover:text-white"/></Link>
     </div>
   );
 };

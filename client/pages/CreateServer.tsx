@@ -1,30 +1,38 @@
-import Axios from 'axios';
+import Axios from "axios";
+import Link from "next/link";
 import { useState } from "react";
+import { RxCross1 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
 interface Props {
   user: {
     name: string;
     profilepic: string;
+    email:string;
   };
   setUser: React.Dispatch<React.SetStateAction<any>>;
 }
-const CreateServer = (props:Props) => {
+const CreateServer = (props: Props) => {
   const [img, setImg] = useState<string>("/defaultserverimg.png");
   const [serverName, setServerName] = useState<string>();
   const [desc, setDesc] = useState<string>();
-  const HandleCreateServer= () => {
-    Axios.post("http://localhost:8000/server/new",{
-      name:serverName,
-      description:desc,
-      imgLink:img,
-      owner:props.user.name,
-    }).catch((err:any) => console.log(err));
+  const HandleCreateServer = () => {
+    Axios.post("http://localhost:8000/server/new", {
+      name: serverName,
+      description: desc,
+      imgLink: img,
+      owner: props.user.name,
+    }).catch((err: any) => console.log(err));
   };
   return (
     <div className="h-full w-full bg-primaryDark flex items-center justify-center">
       <div className="h-max flex md:flex-row flex-col-reverse items-center justify-center px-5vw py-8vh rounded-lg drop-shadow-2xl bg-primary">
+        <Link href="/" className="fixed top-0 right-0 pr-5vw pt-5vh text-3xl">
+          <RxCross1 />
+        </Link>
         <div className="">
-          <h1 className="text-4xl flex font-bold pb-4vh md:pt-0 pt-4vh md:justify-start justify-center">Create Server</h1>
+          <h1 className="text-4xl flex font-bold pb-4vh md:pt-0 pt-4vh md:justify-start justify-center">
+            Create Server
+          </h1>
           <div className="flex-1 flex flex-col">
             <label className="flex flex-col text-sm font-semibold">
               <p className="flex pb-2">
@@ -33,7 +41,7 @@ const CreateServer = (props:Props) => {
               <input
                 placeholder="Enter Server Name"
                 className="bg-primaryDark py-1vh px-2 rounded-lg mb-2vh text-lg"
-                onChange={(e)=>setServerName(e.target.value)}
+                onChange={(e) => setServerName(e.target.value)}
               />
             </label>
             <label className="flex flex-col text-sm font-semibold">
@@ -41,13 +49,13 @@ const CreateServer = (props:Props) => {
               <textarea
                 placeholder="What is this server about?..."
                 className="bg-primaryDark py-1vh px-2 rounded-lg mb-2vh h-40 text-md"
-                onChange={(e)=>setDesc(e.target.value)}
+                onChange={(e) => setDesc(e.target.value)}
               />
             </label>
             <button
-              className="mt-3vh w-full bg-emerald-500 py-1vh rounded-lg text-lg"
+              className="mt-3vh w-full bg-emerald-400 py-1vh rounded-lg text-lg"
               onClick={HandleCreateServer}
-              type='submit'
+              type="submit"
             >
               Create!
             </button>

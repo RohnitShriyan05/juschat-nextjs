@@ -15,7 +15,7 @@ const Chatting: FC = () => {
           <div className="w-12 h-12 bg-red-300 rounded-full"></div>
           <div className="flex-1 flex flex-col pl-4">
             <div className="flex items-center">
-              <p className="pr-2 text-green-500 font-semibold">Rohnit Shriyan</p>
+              <p className="pr-2 text-emerald-400 font-semibold">Rohnit Shriyan</p>
               <p className="text-xs text-neutral-500">12th Sept</p>
             </div>
             <p>Hello My name is Rohnit Shriyan</p>
