@@ -1,11 +1,9 @@
 const mongoose = require("mongoose");
-const channelSchema = new mongoose.Schema({
-  channelName:
-    {
-      type: String,
-    },
-});
 const serverSchema = new mongoose.Schema({
+  publicServer:{
+    type:Boolean,
+    default:true
+  },
   name: {
     type: String,
     required: true,
@@ -18,15 +16,17 @@ const serverSchema = new mongoose.Schema({
     type: String,
     required:true
   },
-  owner: {
+  ownerEmail: {
     type: String,
     required:true
   },
   members: [{
     type: String,
-    ref: "User",
   }],
-  channels: [channelSchema],
+  channels: [{
+    type:String,
+    unique:false
+  }],
 });
 
 module.exports = mongoose.model("servers", serverSchema);

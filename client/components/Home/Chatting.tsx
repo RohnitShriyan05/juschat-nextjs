@@ -2,6 +2,7 @@ import { FC } from "react";
 import {IoMdAddCircle} from "react-icons/io";
 import { MdEmojiEmotions } from "react-icons/md";
 import { AiOutlineGif } from "react-icons/ai";
+
 const Chatting: FC = () => {
   return (
     <div className="h-screen flex-1 flex flex-col bg-primary px-1vw pt-2vh">

@@ -36,6 +36,7 @@ const SignIn: React.FC<Props> = ({ setUser, user }) => {
         setUser({
           name: user?.displayName,
           profilepic: user?.photoURL,
+          email:user?.email
         });
         setLoading(false);
       }

@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const server = require("./routes/Server");
+const joinedServer = require("./routes/joinedServers");
 const app = express();
 app.use(cors({origin: '*'}));
 app.use(express.json());
@@ -10,7 +11,7 @@ mongoose
   .connect("mongodb+srv://rohnitshriyan:rohnitvs@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority", {})
   .then(() => console.log("Connected to MongoDB database"))
   .catch((err) => console.error("Failed to connect to MongoDB database", err));
-
+app.use("/joinedServer", joinedServer);
 app.use("/server", server);
 app.get("/", (req, res) => {
   res.send("hello");

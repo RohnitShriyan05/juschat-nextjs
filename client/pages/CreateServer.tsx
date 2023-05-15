@@ -15,12 +15,19 @@ const CreateServer = (props: Props) => {
   const [img, setImg] = useState<string>("/defaultserverimg.png");
   const [serverName, setServerName] = useState<string>();
   const [desc, setDesc] = useState<string>();
+  const [publicServer, setPublicServer] = useState<boolean>();
   const HandleCreateServer = () => {
     Axios.post("http://localhost:8000/server/new", {
+      publicServer: publicServer,
       name: serverName,
       description: desc,
       imgLink: img,
-      owner: props.user.name,
+      ownerEmail: props.user.email,
+    }).catch((err: any) => console.log(err));
+    Axios.post("http://localhost:8000/joinedServer/new", {
+      email: props.user.email,
+      ServerName: serverName,
+      ServerImage: img
     }).catch((err: any) => console.log(err));
   };
   return (
@@ -52,6 +59,10 @@ const CreateServer = (props: Props) => {
                 onChange={(e) => setDesc(e.target.value)}
               />
             </label>
+            <div className="flex">
+              <button onClick={()=>setPublicServer(true)} className={`border ${publicServer? "border-emerald-400" :"border-neutral-400 text-neutral-400"} rounded py-1 px-2 mr-4`}>Public</button>
+              <button onClick={()=>setPublicServer(false)} className={`border ${publicServer? "border-neutral-400 text-neutral-400" :"border-emerald-400"} rounded py-1 px-2 mr-4`}>Private</button>
+            </div>
             <button
               className="mt-3vh w-full bg-emerald-400 py-1vh rounded-lg text-lg"
               onClick={HandleCreateServer}

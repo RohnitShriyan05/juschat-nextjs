@@ -11,15 +11,16 @@ type Props = {
     email: string;
   };
   setUser: React.Dispatch<React.SetStateAction<any>>;
+  currentServer:string;
 };
-const Sidebar: React.FC<Props> = ({ user, setUser }) => {
+const Sidebar: React.FC<Props> = ({ user, setUser, currentServer }) => {
   const HandleSignOut = (e:any)=>{
     e.preventDefault();
     firebaseApp.auth().signOut().then(()=>setUser(null));
   }
   return (
     <div className="h-full w-1/5 bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh">
-      <p className="text-3xl font-bold">Best Server</p>
+      <p className="text-3xl font-bold">{currentServer}</p>
       <div className="flex-1 pt-2vh">
         <p className="text-xl font-semibold w-full flex items-center text-neutral-300">
           <span className="flex-1">Channels</span>
