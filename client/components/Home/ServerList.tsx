@@ -9,19 +9,22 @@ import { AiOutlineSearch } from "react-icons/ai";
 type Props = {
   email: string;
   setCurrentServer: React.Dispatch<React.SetStateAction<any>>;
+  setCurrentChannel: React.Dispatch<React.SetStateAction<any>>;
 };
 type serverListType = {
   ServerName: string;
   ServerImage: string;
 };
-const ServerList: React.FC<Props> = ({ email, setCurrentServer }) => {
+const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChannel }) => {
   const [serverList, setServerList] = useState<Array<serverListType>>([]);
   useEffect(() => {
-    Axios.get(`http://localhost:8000/joinedServer/getList?email=${email}`)
+    if(email){
+      Axios.get(`http://localhost:8000/joinedServer/getList?email=${email}`)
       .then((res) => {
         setServerList(res.data);
       })
       .catch();
+    }
   }, [email]);
   return (
     <div className="h-full flex flex-col items-center px-1vw py-1vh bg-primaryDarker">
@@ -32,7 +35,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer }) => {
               <button
                 key={ServerName}
                 title={ServerName}
-                onClick={() => setCurrentServer(ServerName)}
+                onClick={() => {setCurrentServer(ServerName)}}
                 className="w-12 h-12 mt-1vh"
               >
                 <img

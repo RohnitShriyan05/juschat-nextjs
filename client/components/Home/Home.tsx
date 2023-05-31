@@ -13,12 +13,13 @@ type Props = {
     setUser: React.Dispatch<React.SetStateAction<any>>
 };
 const HomePg: React.FC<Props> =({user, setUser})=> {
-    const [currentServer, setCurrentServer] = useState<string>("")
+    const [currentServer, setCurrentServer] = useState<string>("");
+    const [currentChannel, setCurrentChannel] = useState<string>("General");
     return(
-        <div className="bg-primary h-screen w-full flex">
-            <ServerList email={user.email} setCurrentServer={setCurrentServer}/>
-            <Sidebar user={user} setUser={setUser} currentServer={currentServer}/>
-            <Chatting/>
+        <div className="bg-primary h-screen lg:w-full w-max overflow-x-hidden flex">
+            <ServerList email={user.email} setCurrentServer={setCurrentServer} setCurrentChannel={setCurrentChannel}/>
+            <Sidebar user={user} setUser={setUser} currentServer={currentServer} setCurrentChannel={setCurrentChannel} currentChannel={currentChannel}/>
+            <Chatting currentChannel={currentChannel} user={user}/>
             <FriendList/>
         </div>
     );

@@ -3,35 +3,49 @@ import Link from "next/link";
 import { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { MdEdit } from "react-icons/md";
+import { IoMdArrowDropdown, IoMdArrowDropright } from "react-icons/io";
+import {useRouter} from 'next/router'
 interface Props {
   user: {
     name: string;
     profilepic: string;
-    email:string;
+    email: string;
   };
   setUser: React.Dispatch<React.SetStateAction<any>>;
 }
 const CreateServer = (props: Props) => {
+  const router = useRouter()
   const [img, setImg] = useState<string>("/defaultserverimg.png");
   const [serverName, setServerName] = useState<string>();
   const [desc, setDesc] = useState<string>();
-  const [publicServer, setPublicServer] = useState<boolean>();
-  const HandleCreateServer = () => {
-    Axios.post("http://localhost:8000/server/new", {
+  const [publicServer, setPublicServer] = useState<boolean>(true);
+  const [memPerm, setMemPerm] = useState<boolean>(true);
+  const [advOpt, setAdvOpt] = useState<boolean>(false);
+  const HandleCreateServer = (e) => {
+    e.preventDefault();
+    Axios.post("http://192.168.1.7:8000/server/new", {
       publicServer: publicServer,
       name: serverName,
       description: desc,
       imgLink: img,
+      ownerName: props.user.name,
       ownerEmail: props.user.email,
+      memberPermision: memPerm
     }).catch((err: any) => console.log(err));
-    Axios.post("http://localhost:8000/joinedServer/new", {
+    Axios.post("http://192.168.1.7:8000/joinedServer/new", {
       email: props.user.email,
       ServerName: serverName,
-      ServerImage: img
+      ServerImage: img,
     }).catch((err: any) => console.log(err));
+    alert("Server Created Successfully");
+    setServerName("");
+    setDesc("");
+    setMemPerm(true);
+    setPublicServer(true);
+    setAdvOpt(false);
   };
   return (
-    <div className="h-full w-full bg-primaryDark flex items-center justify-center">
+    <form className="h-full w-full bg-primaryDark flex items-center justify-center" onSubmit={HandleCreateServer}>
       <div className="h-max flex md:flex-row flex-col-reverse items-center justify-center px-5vw py-8vh rounded-lg drop-shadow-2xl bg-primary">
         <Link href="/" className="fixed top-0 right-0 pr-5vw pt-5vh text-3xl">
           <RxCross1 />
@@ -49,6 +63,7 @@ const CreateServer = (props: Props) => {
                 placeholder="Enter Server Name"
                 className="bg-primaryDark py-1vh px-2 rounded-lg mb-2vh text-lg"
                 onChange={(e) => setServerName(e.target.value)}
+                value={serverName}
               />
             </label>
             <label className="flex flex-col text-sm font-semibold">
@@ -57,15 +72,65 @@ const CreateServer = (props: Props) => {
                 placeholder="What is this server about?..."
                 className="bg-primaryDark py-1vh px-2 rounded-lg mb-2vh h-40 text-md"
                 onChange={(e) => setDesc(e.target.value)}
+                value={desc}
               />
             </label>
             <div className="flex">
-              <button onClick={()=>setPublicServer(true)} className={`border ${publicServer? "border-emerald-400" :"border-neutral-400 text-neutral-400"} rounded py-1 px-2 mr-4`}>Public</button>
-              <button onClick={()=>setPublicServer(false)} className={`border ${publicServer? "border-neutral-400 text-neutral-400" :"border-emerald-400"} rounded py-1 px-2 mr-4`}>Private</button>
+              <button
+                onClick={() => setPublicServer(true)}
+                className={`border ${
+                  publicServer
+                    ? "border-emerald-400"
+                    : "border-neutral-400 text-neutral-400"
+                } rounded py-1 px-2 mr-4`}
+              >
+                Public
+              </button>
+              <button
+                onClick={() => setPublicServer(false)}
+                className={`border ${
+                  publicServer
+                    ? "border-neutral-400 text-neutral-400"
+                    : "border-emerald-400"
+                } rounded py-1 px-2 mr-4`}
+              >
+                Invite Only
+              </button>
             </div>
+            <button onClick={()=>setAdvOpt(!advOpt)} className="text-start w-max text-emerald-400 mt-2vh mb-1 flex items-center">
+              Advanced Options
+              {
+                advOpt ?
+                <IoMdArrowDropdown />
+                :
+                <IoMdArrowDropright />
+              }
+            </button>
+            {advOpt ? (
+              <div>
+                <p>Who can create & delete channels?</p>
+                <div className="flex pt-1">
+                  <button className="flex items-center px-2">
+                    <div className="h-3 w-3 rounded-sm mr-1 bg-emerald-400"></div>
+                    <p>Admin</p>
+                  </button>
+                  <button
+                    className="flex items-center px-2"
+                    onClick={() => setMemPerm(!memPerm)}
+                  >
+                    <div
+                      className={`h-3 w-3 rounded-sm mr-1 ${
+                        memPerm ? "bg-emerald-400" : "bg-neutral-400"
+                      }`}
+                    ></div>
+                    <p>Members</p>
+                  </button>
+                </div>
+              </div>
+            ) : null}
+
             <button
               className="mt-3vh w-full bg-emerald-400 py-1vh rounded-lg text-lg"
-              onClick={HandleCreateServer}
               type="submit"
             >
               Create!
@@ -88,7 +153,7 @@ const CreateServer = (props: Props) => {
           </label>
         </div>
       </div>
-    </div>
+    </form>
   );
 };
 

@@ -20,6 +20,10 @@ const serverSchema = new mongoose.Schema({
     type: String,
     required:true
   },
+  memberPermision:{
+    type: Boolean,
+    default: true
+  },
   members: [{
     type: String,
   }],

@@ -37,7 +37,7 @@ router.post("/new", async (req, res) => {
 
 router.get("/getList", async (req,res)=>{
   const {email} = req.query;
-  joinedServerData.findOne({email:email}).then((user)=>res.send(user.joinedServers));
+  joinedServerData.findOne({email:email}).then((user)=>res.send(user?.joinedServers));
 })
 
 module.exports = router;
