@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "./Sidebar";
 import ServerList from "./ServerList";
-import FriendList from "./FriendList";
+import MemberList from "./MemberList";
 import Chatting from "./Chatting";
 import {useState} from "react";
 type Props = {
@@ -20,7 +20,7 @@ const HomePg: React.FC<Props> =({user, setUser})=> {
             <ServerList email={user.email} setCurrentServer={setCurrentServer} setCurrentChannel={setCurrentChannel}/>
             <Sidebar user={user} setUser={setUser} currentServer={currentServer} setCurrentChannel={setCurrentChannel} currentChannel={currentChannel}/>
             <Chatting currentChannel={currentChannel} user={user}/>
-            <FriendList/>
+            <MemberList/>
         </div>
     );
 }

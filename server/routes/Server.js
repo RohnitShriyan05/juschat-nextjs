@@ -27,7 +27,7 @@ router.post("/new", async (req, res) => {
 router.get("/getChannelList", async (req, res) => {
   const { serverName } = req.query;
   ServerData.findOne({ name: serverName }).then((server) =>
-    res.send(server.channels)
+    res.send({channels: server.channels, ownerEmail:server.ownerEmail})
   );
 });
 

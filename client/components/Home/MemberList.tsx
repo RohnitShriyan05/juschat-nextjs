@@ -1,4 +1,4 @@
-const FriendList: React.FC = () => {
+const MemberList: React.FC = () => {
   return (
     <div className="h-full w-1/6 bg-primary">
       <div className="h-full bg-primaryDark"></div>
@@ -6,4 +6,4 @@ const FriendList: React.FC = () => {
   );
 };
 
-export default FriendList;
+export default MemberList;

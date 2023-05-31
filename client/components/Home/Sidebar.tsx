@@ -34,6 +34,8 @@ const Sidebar: React.FC<Props> = ({
   const [showChannels, setShowChannels] = useState<boolean>(true);
   const [showAddChannel, setShowAddChannel] = useState<boolean>(false);
   const [newChannel, setNewChannel] = useState<string>("");
+  const [isOwner, setIsOwner] = useState<boolean>(false);
+  const [serverIsMemberEditable, setServerIsMemberEditable] = useState<boolean>(false);
   const HandleSignOut = (e: any) => {
     e.preventDefault();
     firebaseApp
@@ -47,11 +49,14 @@ const Sidebar: React.FC<Props> = ({
         `http://localhost:8000/server/getChannelList?serverName=${currentServer}`
       )
         .then((res) => {
-          setChannelList(res.data);
+          setChannelList(res.data.channels);
+          if(user.email === res.data.ownerEmail){
+            setIsOwner(true);
+          }
         })
         .catch();
     }
-  }, [currentServer]);
+  }, [currentServer, user]);
   const handleAddServer = () => {
     setShowAddChannel(true);
   };
@@ -72,10 +77,10 @@ const Sidebar: React.FC<Props> = ({
       <p className="text-3xl font-bold">
         {currentServer ? currentServer : "Select Server"}
       </p>
-      <div className="flex-1 pt-2vh w-full">
+      <div className="flex-1 pt-2vh w-full overflow-scroll">
         {currentServer ? (
           <div className="text-xl font-semibold w-full flex items-center text-neutral-300">
-            <p className="flex-1">Channels</p>
+            <p className="flex-1">{isOwner? "true":"false"}</p>
             <button onClick={handleAddServer}>
               <IoMdAdd className="text-lg ml-1" title="Add Channel" />
             </button>
