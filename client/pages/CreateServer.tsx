@@ -21,9 +21,9 @@ const CreateServer = (props: Props) => {
   const [publicServer, setPublicServer] = useState<boolean>(true);
   const [memPerm, setMemPerm] = useState<boolean>(true);
   const [advOpt, setAdvOpt] = useState<boolean>(false);
-  const HandleCreateServer = (e) => {
+  const HandleCreateServer = (e:any) => {
     e.preventDefault();
-    Axios.post("http://192.168.1.7:8000/server/new", {
+    Axios.post("http://localhost:8000/server/new", {
       publicServer: publicServer,
       name: serverName,
       description: desc,
@@ -32,7 +32,7 @@ const CreateServer = (props: Props) => {
       ownerEmail: props.user.email,
       memberPermision: memPerm
     }).catch((err: any) => console.log(err));
-    Axios.post("http://192.168.1.7:8000/joinedServer/new", {
+    Axios.post("http://localhost:8000/joinedServer/new", {
       email: props.user.email,
       ServerName: serverName,
       ServerImage: img,

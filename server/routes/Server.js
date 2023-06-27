@@ -31,6 +31,26 @@ router.get("/getChannelList", async (req, res) => {
   );
 });
 
+router.get("/getPublicServer", async (req,res)=>{
+  try {
+    // Retrieve all public servers
+    const servers = await ServerData.find({ publicServer: true });
+    const serverData=[];
+    servers.map((data)=>{
+      serverData.push({
+        name:data.name,
+        desc:data.description,
+        img:data.displayImage,
+        isJoined:false
+      })
+    })
+    res.send(serverData);
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ message: 'Internal server error' });
+  }
+})
+
 router.post("/new/channel", async (req, res) => {
   const { serverName, channelName } = req.body;
   ServerData.findOne({ name: serverName }).then((server) => {

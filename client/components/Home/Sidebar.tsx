@@ -62,7 +62,7 @@ const Sidebar: React.FC<Props> = ({
   };
   const addNewChannel = () => {
     if (newChannel === "General") {
-      alert(`Cannot use "General" as channel name`);
+      alert(`Cannot use "General" as channel name`);``
     } else {
       Axios.post("http://localhost:8000/server/new/channel", {
         channelName: newChannel,
@@ -77,10 +77,10 @@ const Sidebar: React.FC<Props> = ({
       <p className="text-3xl font-bold">
         {currentServer ? currentServer : "Select Server"}
       </p>
-      <div className="flex-1 pt-2vh w-full overflow-scroll">
+      <div className="flex-1 pt-2vh w-full overflow-auto">
         {currentServer ? (
           <div className="text-xl font-semibold w-full flex items-center text-neutral-300">
-            <p className="flex-1">{isOwner? "true":"false"}</p>
+            <p className="flex-1">Channels</p>
             <button onClick={handleAddServer}>
               <IoMdAdd className="text-lg ml-1" title="Add Channel" />
             </button>

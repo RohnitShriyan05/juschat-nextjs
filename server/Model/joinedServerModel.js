@@ -8,9 +8,11 @@ const JoinedSchema = new mongoose.Schema({
     {
       ServerName: {
         type: String,
+        required:true
       },
       ServerImage:{
-        type:String
+        type:String,
+        required:true,
       }
     },
   ],
