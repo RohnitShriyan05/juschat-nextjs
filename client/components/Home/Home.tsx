@@ -19,7 +19,7 @@ const HomePg: React.FC<Props> =({user, setUser})=> {
         <div className="bg-primary h-screen lg:w-full w-max overflow-x-hidden flex">
             <ServerList email={user.email} setCurrentServer={setCurrentServer} setCurrentChannel={setCurrentChannel}/>
             <Sidebar user={user} setUser={setUser} currentServer={currentServer} setCurrentChannel={setCurrentChannel} currentChannel={currentChannel}/>
-            <Chatting currentChannel={currentChannel} user={user}/>
+            <Chatting currentChannel={currentChannel} currentServer={currentServer} user={user}/>
             <MemberList/>
         </div>
     );

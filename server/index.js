@@ -1,20 +1,56 @@
 const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const server = require("./routes/Server");
-const joinedServer = require("./routes/joinedServers");
 const app = express();
-app.use(cors({origin: '*'}));
+const http = require("http");
+const { Server } = require("socket.io");
+const cors = require("cors");
+const mongoose = require("mongoose");
+//Routes Import
+const serverRoute = require("./routes/Server");
+const joinedServerRoute = require("./routes/joinedServers");
+
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
-app.use("/server",server);
+
+
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"]
+  }
+})
+
+io.on("connection", (socket) => {
+  console.log("user connected " + socket.id);
+  var currentRoom = "";
+  socket.on("joinChannel", (data) => {
+    socket.join(data.currentServer + " " + data.currentChannel);
+    currentRoom = data.currentServer + " " + data.currentChannel;
+  })
+
+  socket.on("sendMessage", (data) => {
+    console.log(currentRoom);
+    socket.broadcast.to(currentRoom).emit("receiveMessage" ,JSON.stringify({message: data.message, username:data.username, pfp:data}));
+
+  })
+
+
+
+})
+
+
+
+
 mongoose
   .connect("mongodb+srv://rohnitshriyan:rohnitvs@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority", {})
   .then(() => console.log("Connected to MongoDB database"))
   .catch((err) => console.error("Failed to connect to MongoDB database", err));
-app.use("/joinedServer", joinedServer);
-app.use("/server", server);
+
+
+app.use("/joinedServer", joinedServerRoute);
+app.use("/server", serverRoute);
 app.get("/", (req, res) => {
   res.send("hello");
 });
 
-app.listen(8000, () => console.log("url: http://localhost:8000/"));
+server.listen(8000, () => console.log("url: http://localhost:8000/"));

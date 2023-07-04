@@ -1,7 +1,8 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import SignIn from "../components/LogIn/SignIn";
-import { useState } from 'react'
+import { useState } from 'react';
+
 interface User {
     name: string,
     profilepic : string,
