@@ -7,7 +7,7 @@ const mongoose = require("mongoose");
 //Routes Import
 const serverRoute = require("./routes/Server");
 const joinedServerRoute = require("./routes/joinedServers");
-
+const chatsRoute = require("./routes/Chats");
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
 
@@ -30,10 +30,9 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (data) => {
     console.log(currentRoom);
-    socket.broadcast.to(currentRoom).emit("receiveMessage" ,JSON.stringify({message: data.message, username:data.username, pfp:data}));
+    socket.broadcast.to(currentRoom).emit("receiveMessage" ,JSON.stringify({message: data.message, username:data.username, pfp:data.pfp}));
 
   })
-
 
 
 })
@@ -49,6 +48,7 @@ mongoose
 
 app.use("/joinedServer", joinedServerRoute);
 app.use("/server", serverRoute);
+app.use("/chats", chatsRoute);
 app.get("/", (req, res) => {
   res.send("hello");
 });
