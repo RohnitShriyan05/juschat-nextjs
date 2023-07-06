@@ -18,6 +18,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/CreateServer.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/CreateServer.js", "components/Home/Chatting.js"],
   "exclude": ["node_modules"]
 }

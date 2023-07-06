@@ -30,8 +30,8 @@ io.on("connection", (socket) => {
 
   socket.on("sendMessage", (data) => {
     console.log(currentRoom);
-    socket.broadcast.to(currentRoom).emit("receiveMessage" ,JSON.stringify({message: data.message, username:data.username, pfp:data.pfp}));
-
+    socket.broadcast.to(currentRoom).emit("receiveMessage" , {message: data.message, username:data.username, pfp:data.pfp});
+    
   })
 
 

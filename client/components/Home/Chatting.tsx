@@ -52,7 +52,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
 
   useEffect(() => {
     socket.on("receiveMessage", (data) => {
-      console.log(data);
+      setChats(prevState => [...prevState, data]);
     })
   }, [socket])
   return (
@@ -63,20 +63,20 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
           {currentChannel}
         </p>
       </div>
-      <div className="flex-1 pt-4">
+      <div className="flex-1 pt-4 overflow-y-scroll scrollbar">
         {
           Array.isArray(chats)? 
           chats.map((data) => {
             return (
-              <div className="w-full flex py-2">
+              <div className="w-max flex py-2 ">
                 <Image
                   src={data.pfp}
                   alt="pfp"
-                  height={40}
+                  height={1}
                   width={50}
                   className="object-cover rounded-full border border-neutral-600"
                 />
-                <div className="flex-1 flex flex-col pl-4">
+                <div className="flex flex-col pl-4">
                   <div className="flex items-center">
                     <p className="pr-2 text-emerald-400 font-semibold">
                       {data.username}

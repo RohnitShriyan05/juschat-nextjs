@@ -50,7 +50,7 @@ const Sidebar: React.FC<Props> = ({
       )
         .then((res) => {
           setChannelList(res.data.channels);
-          if(user.email === res.data.ownerEmail){
+          if (user.email === res.data.ownerEmail) {
             setIsOwner(true);
           }
         })
@@ -60,26 +60,27 @@ const Sidebar: React.FC<Props> = ({
   const handleAddServer = () => {
     setShowAddChannel(true);
   };
-  const addNewChannel = () => {
+  const addNewChannel = (e) => {
+    e.preventDefault();
     if (newChannel === "General") {
-      alert(`Cannot use "General" as channel name`);``
+      alert(`Cannot use "General" as channel name`); ``
     } else {
       Axios.post("http://localhost:8000/server/new/channel", {
         channelName: newChannel,
         serverName: currentServer,
-      }).then((res)=>{setChannelList(res.data); setShowAddChannel(false)});
+      }).then((res) => { setChannelList(res.data); setShowAddChannel(false) });
     }
   };
   return (
     <div
-      className={`h-full w-1/4 bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh`}
+      className={`h-full w-1/6 bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh`}
     >
-      <p className="text-3xl font-bold">
+      <p className="text-2xl font-bold">
         {currentServer ? currentServer : "Select Server"}
       </p>
       <div className="flex-1 pt-2vh w-full overflow-auto">
         {currentServer ? (
-          <div className="text-xl font-semibold w-full flex items-center text-neutral-300">
+          <div className="text-lg font-semibold w-full flex items-center text-neutral-300">
             <p className="flex-1">Channels</p>
             <button onClick={handleAddServer}>
               <IoMdAdd className="text-lg ml-1" title="Add Channel" />
@@ -94,38 +95,38 @@ const Sidebar: React.FC<Props> = ({
           </div>
         ) : null}
         <div
-          className={`pt-1vh text-neutral-400 text-lg flex flex-col items-start ${
-            showChannels ? "block" : "hidden"
-          }`}
+          className={`pt-1vh text-neutral-400 text-lg flex flex-col items-start ${showChannels ? "block" : "hidden"
+            }`}
         >
           {Array.isArray(channelList)
             ? channelList.map((channelName) => (
-                <button
-                  key={channelName}
-                  className="mt-1 px-4 rounded-xl w-full flex text-start items-center focus:text-white hover:bg-primary group"
-                  onClick={() => setCurrentChannel(channelName)}
-                >
-                  <p className="flex-1">#{channelName}</p>
-                </button>
-              ))
+              <button
+                key={channelName}
+                className="mt-1 px-4 rounded-xl w-full flex text-start items-center focus:text-white hover:bg-primary group"
+                onClick={() => setCurrentChannel(channelName)}
+              >
+                <p className="flex-1">#{channelName}</p>
+              </button>
+            ))
             : null}
         </div>
         {showAddChannel ? (
-          <div className="mt-2 pl-1vw w-full flex items-center">
+          <form className="mt-2 w-full flex items-center">
             <input
-              className="flex-1 bg-transparent border border-neutral-600 px-2 rounded-sm"
+              className="flex-1 ml-4 bg-transparent border border-neutral-600 w-10 px-2 rounded-sm"
               placeholder="Enter Channel Name"
               onChange={(e) => setNewChannel(e.target.value)}
             />
-            <BsCheck
-              className="text-2xl ml-2 cursor-pointer hover:text-white text-neutral-300"
-              onClick={addNewChannel}
-            />
+            <button onClick={addNewChannel} type="submit">
+              <BsCheck
+                className="text-2xl ml-2 cursor-pointer hover:text-white text-neutral-300"
+              />
+            </button>
             <IoMdClose
               className="text-xl ml-1 cursor-pointer hover:text-white text-neutral-300"
               onClick={() => setShowAddChannel(false)}
             />
-          </div>
+          </form>
         ) : null}
       </div>
       <div className="flex items-center text-lg">

@@ -7,9 +7,9 @@ module.exports = {
     extend: {
       colors:{
         metablue:"#0080FB",
-        primary:"#35393E",
-        primaryDark: "#2F3136",
-        primaryDarker: "#202226",
+        primary:"#313338",
+        primaryDark: "#2B2D31",
+        primaryDarker: "#1E1F22",
         inputBg : "#40444B"
       },
       backgroundImage: {

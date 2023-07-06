@@ -9,13 +9,13 @@ import { AiOutlineSearch } from "react-icons/ai";
 type Props = {
   email: string;
   setCurrentServer: React.Dispatch<React.SetStateAction<any>>;
-  setCurrentChannel: React.Dispatch<React.SetStateAction<any>>;
+  currentServer: String;
 };
 type serverListType = {
   ServerName: string;
   ServerImage: string;
 };
-const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChannel }) => {
+const ServerList: React.FC<Props> = ({ email, setCurrentServer,  currentServer }) => {
   const [serverList, setServerList] = useState<Array<serverListType>>([]);
   useEffect(() => {
     if(email){
@@ -36,7 +36,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChanne
                 key={ServerName}
                 title={ServerName}
                 onClick={() => {setCurrentServer(ServerName)}}
-                className="w-12 h-12 mt-1vh"
+                className={`w-12 h-12 mt-1vh`}
               >
                 <img
                   className="object-cover rounded-full"
