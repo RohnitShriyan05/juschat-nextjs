@@ -25,7 +25,7 @@ type T = {
 const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
   const [message, setMessage] = useState<string>("");
   const [chats, setChats] = useState<any[]>([]);
-
+  const [inputVal, setInputVal] = useState<string>("");
   const sendMessage = (e) => {
     e.preventDefault();
     socket.emit("sendMessage", { message: message, username: user.name, pfp: user.profilepic });
@@ -37,6 +37,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
       message: message,
       pfp: user.profilepic
     });
+    setInputVal("")
   }
 
   useEffect(() => {
@@ -46,6 +47,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
       Axios.get(`http://localhost:8000/chats/list?currentServer=${currentServer}&currentChannel=${currentChannel}`)
         .then((res) => {
           setChats(res.data);
+          setInputVal("");
         })
     }
   }, [currentChannel, currentServer])
@@ -96,8 +98,8 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
         <input
           className="flex-1 bg-inputBg ml-2"
           placeholder="Message #General"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
+          onChange={(e) => {setMessage(e.target.value); setInputVal(e.target.value)}}
+          value={inputVal}  
         />
         <button onClick={sendMessage} className="hidden" type="submit">Send Message</button>
         <MdEmojiEmotions />
