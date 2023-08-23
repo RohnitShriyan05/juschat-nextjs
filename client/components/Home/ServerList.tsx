@@ -27,7 +27,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer,  currentServer }
     }
   }, [email]);
   return (
-    <div className="h-full flex flex-col items-center px-1vw py-1vh bg-primaryDarker">
+    <div className="h-full w-max flex flex-col items-center px-1vw py-1vh bg-primaryDarker">
       <GiJusticeStar className="h-12 w-12 mb-1vh" />
       <div className="flex-1 flex flex-col items-center">
         {Array.isArray(serverList)

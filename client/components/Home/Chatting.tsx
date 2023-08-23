@@ -58,14 +58,14 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
     })
   }, [socket])
   return (
-    <div className="h-screen flex-1 flex flex-col bg-primary px-1vw pt-2vh">
+    <div className="h-full w-max flex-1 flex flex-col bg-primary px-1vw pt-2vh">
       <div className="flex border-b border-neutral-600 pb-2">
         <p className="flex-1 text-3xl">
           <span className="text-neutral-400">{currentChannel ? "#" : ""}</span>{" "}
           {currentChannel}
         </p>
       </div>
-      <div className="flex-1 pt-4 overflow-y-scroll scrollbar">
+      <div className="flex-1 pt-4 overflow-y-auto scrollbar">
         {
           Array.isArray(chats)? 
           chats.map((data) => {

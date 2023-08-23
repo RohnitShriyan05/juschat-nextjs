@@ -34,3 +34,22 @@ html, body, #fullheight {
     width: 250px;
     background: blue;
 }
+/* width */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #4a4a4a;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7a7a7a;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

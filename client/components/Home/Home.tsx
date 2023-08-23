@@ -16,7 +16,7 @@ const HomePg: React.FC<Props> =({user, setUser})=> {
     const [currentServer, setCurrentServer] = useState<string>("");
     const [currentChannel, setCurrentChannel] = useState<string>("Select Channnel");
     return(
-        <div className="bg-primary h-screen lg:w-full w-max overflow-x-hidden flex">
+        <div className="bg-primary h-screen overflow-hidden flex">
             <ServerList email={user.email} setCurrentServer={setCurrentServer} currentServer={currentServer}/>
             <Sidebar user={user} setUser={setUser} currentServer={currentServer} setCurrentChannel={setCurrentChannel} currentChannel={currentChannel}/>
             <Chatting currentChannel={currentChannel} currentServer={currentServer} user={user}/>

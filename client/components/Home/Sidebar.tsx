@@ -4,6 +4,7 @@ import {
   MdHeadphones,
   MdKeyboardArrowUp,
   MdDeleteOutline,
+  MdRefresh
 } from "react-icons/md";
 import { TiMicrophone } from "react-icons/ti";
 import { IoIosExit, IoMdAdd, IoMdClose } from "react-icons/io";
@@ -43,6 +44,18 @@ const Sidebar: React.FC<Props> = ({
       .signOut()
       .then(() => setUser(null));
   };
+  const getChannel= () =>{
+    Axios.get(
+      `http://localhost:8000/server/getChannelList?serverName=${currentServer}`
+    )
+      .then((res) => {
+        setChannelList(res.data.channels);
+        if (user.email === res.data.ownerEmail) {
+          setIsOwner(true);
+        }
+      })
+      .catch();
+  }
   useEffect(() => {
     if (currentServer) {
       Axios.get(
@@ -73,7 +86,7 @@ const Sidebar: React.FC<Props> = ({
   };
   return (
     <div
-      className={`h-full w-1/6 bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh`}
+      className={`h-full bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh`}
     >
       <p className="text-2xl font-bold">
         {currentServer ? currentServer : "Select Server"}
@@ -82,6 +95,9 @@ const Sidebar: React.FC<Props> = ({
         {currentServer ? (
           <div className="text-lg font-semibold w-full flex items-center text-neutral-300">
             <p className="flex-1">Channels</p>
+            <button onClick={getChannel}>
+              <MdRefresh className="text-lg ml-1"/>
+            </button>
             <button onClick={handleAddServer}>
               <IoMdAdd className="text-lg ml-1" title="Add Channel" />
             </button>
