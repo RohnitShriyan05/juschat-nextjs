@@ -86,7 +86,7 @@ const Sidebar: React.FC<Props> = ({
   };
   return (
     <div
-      className={`h-full bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh`}
+      className={`h-full bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh ${currentChannel =="Select a Channel"? "flex":"lg:flex hidden"}`}
     >
       <p className="text-2xl font-bold">
         {currentServer ? currentServer : "Select Server"}

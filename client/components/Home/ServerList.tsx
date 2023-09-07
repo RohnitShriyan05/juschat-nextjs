@@ -7,15 +7,15 @@ import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 
 type Props = {
-  email: string;
+  email: string 
   setCurrentServer: React.Dispatch<React.SetStateAction<any>>;
-  currentServer: String;
+  setCurrentChannel: React.Dispatch<React.SetStateAction<any>>;
 };
 type serverListType = {
   ServerName: string;
   ServerImage: string;
 };
-const ServerList: React.FC<Props> = ({ email, setCurrentServer,  currentServer }) => {
+const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChannel }) => {
   const [serverList, setServerList] = useState<Array<serverListType>>([]);
   useEffect(() => {
     if(email){
@@ -27,7 +27,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer,  currentServer }
     }
   }, [email]);
   return (
-    <div className="h-full w-max flex flex-col items-center px-1vw py-1vh bg-primaryDarker">
+    <div className={`h-full w-max flex flex-col items-center px-1vw py-1vh bg-primaryDarker `}>
       <GiJusticeStar className="h-12 w-12 mb-1vh" />
       <div className="flex-1 flex flex-col items-center">
         {Array.isArray(serverList)
@@ -35,7 +35,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer,  currentServer }
               <button
                 key={ServerName}
                 title={ServerName}
-                onClick={() => {setCurrentServer(ServerName)}}
+                onClick={() => {setCurrentServer(ServerName); setCurrentChannel('Select a Channel')}}
                 className={`w-12 h-12 mt-1vh`}
               >
                 <img
