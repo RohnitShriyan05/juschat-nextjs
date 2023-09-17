@@ -37,7 +37,7 @@ const Explore = (props: Props) => {
                 </div>
                 <div className="w-8 h-8 rounded-full bg-red-500"></div>
             </div>
-            <div className="flex-1 w-full grid grid-cols-3 overflow-hidden gap-4 px-4">
+            <div className="flex-1 w-full grid lg:grid-cols-3 grid-cols-1 overflow-scroll gap-4 px-4">
                 {
                     publicServer?.map(({ img, name, desc, isJoined }) =>
                         <div key={name} className="flex flex-col place-items-center justify-center w-full h-max border border-neutral-600 rounded-2xl">

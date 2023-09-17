@@ -88,12 +88,12 @@ const Sidebar: React.FC<Props> = ({
     <div
       className={`h-full bg-primaryDark flex flex-col px-1vw pt-2vh pb-1vh ${currentChannel =="Select a Channel"? "flex":"lg:flex hidden"}`}
     >
-      <p className="text-2xl font-bold">
+      <p className="lg:text-2xl text-lg font-bold pl-2">
         {currentServer ? currentServer : "Select Server"}
       </p>
-      <div className="flex-1 pt-2vh w-full overflow-auto">
+      <div className="flex-1 pt-2vh lg:text-xl text-lg w-full overflow-auto pl-2">
         {currentServer ? (
-          <div className="text-lg font-semibold w-full flex items-center text-neutral-300">
+          <div className="text-lg font-medium w-full flex items-center text-neutral-300">
             <p className="flex-1">Channels</p>
             <button onClick={getChannel}>
               <MdRefresh className="text-lg ml-1"/>
@@ -121,7 +121,7 @@ const Sidebar: React.FC<Props> = ({
                 className="mt-1 px-4 rounded-xl w-full flex text-start items-center focus:text-white hover:bg-primary group"
                 onClick={() => setCurrentChannel(channelName)}
               >
-                <p className="flex-1">#{channelName}</p>
+                <p className="flex-1 lg:text-lg text-md">#{channelName}</p>
               </button>
             ))
             : null}
@@ -129,7 +129,7 @@ const Sidebar: React.FC<Props> = ({
         {showAddChannel ? (
           <form className="mt-2 w-full flex items-center">
             <input
-              className="flex-1 ml-4 bg-transparent border border-neutral-600 w-10 px-2 rounded-sm"
+              className="lg:text-md text-sm flex-1 ml-4 bg-transparent border border-neutral-600 w-10 px-2 rounded-sm"
               placeholder="Enter Channel Name"
               onChange={(e) => setNewChannel(e.target.value)}
             />

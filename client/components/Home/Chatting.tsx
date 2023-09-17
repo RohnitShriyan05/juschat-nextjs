@@ -60,7 +60,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
   return (
     <div className="h-full w-max flex-1 flex flex-col bg-primary px-1vw pt-2vh">
       <div className="flex border-b border-neutral-600 pb-2">
-        <p className="flex-1 text-3xl">
+        <p className="flex-1 text-3xl pl-4 lg:text-2xl text-lg">
           <span className="text-neutral-400">{currentChannel ? "#" : ""}</span>{" "}
           {currentChannel}
         </p>
@@ -70,13 +70,13 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
           Array.isArray(chats)? 
           chats.map((data) => {
             return (
-              <div className="w-max flex py-2 ">
+              <div className="w-max flex justify-center py-2 ">
                 <Image
                   src={data.pfp}
                   alt="pfp"
-                  height={1}
-                  width={50}
-                  className="object-cover rounded-full border border-neutral-600"
+                  height={100}
+                  width={100}
+                  className="img"
                 />
                 <div className="flex flex-col pl-4">
                   <div className="flex items-center">
