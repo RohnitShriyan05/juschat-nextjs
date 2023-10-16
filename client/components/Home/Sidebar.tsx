@@ -73,7 +73,7 @@ const Sidebar: React.FC<Props> = ({
   const handleAddServer = () => {
     setShowAddChannel(true);
   };
-  const addNewChannel = (e) => {
+  const addNewChannel = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     if (newChannel === "General") {
       alert(`Cannot use "General" as channel name`); ``

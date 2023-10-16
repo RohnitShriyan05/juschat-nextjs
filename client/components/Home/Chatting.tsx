@@ -26,7 +26,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
   const [message, setMessage] = useState<string>("");
   const [chats, setChats] = useState<any[]>([]);
   const [inputVal, setInputVal] = useState<string>("");
-  const sendMessage = (e) => {
+  const sendMessage = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     socket.emit("sendMessage", { message: message, username: user.name, pfp: user.profilepic });
     setChats(prevState => [...prevState, { message: message, username: user.name, pfp: user.profilepic }]);
