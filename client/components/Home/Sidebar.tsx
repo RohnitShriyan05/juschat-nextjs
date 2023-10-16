@@ -46,7 +46,7 @@ const Sidebar: React.FC<Props> = ({
   };
   const getChannel= () =>{
     Axios.get(
-      `http://localhost:8000/server/getChannelList?serverName=${currentServer}`
+      `https://juschat.onrender.com/server/getChannelList?serverName=${currentServer}`
     )
       .then((res) => {
         setChannelList(res.data.channels);
@@ -59,7 +59,7 @@ const Sidebar: React.FC<Props> = ({
   useEffect(() => {
     if (currentServer) {
       Axios.get(
-        `http://localhost:8000/server/getChannelList?serverName=${currentServer}`
+        `https://juschat.onrender.com/server/getChannelList?serverName=${currentServer}`
       )
         .then((res) => {
           setChannelList(res.data.channels);
@@ -78,7 +78,7 @@ const Sidebar: React.FC<Props> = ({
     if (newChannel === "General") {
       alert(`Cannot use "General" as channel name`); ``
     } else {
-      Axios.post("http://localhost:8000/server/new/channel", {
+      Axios.post("https://juschat.onrender.com/server/new/channel", {
         channelName: newChannel,
         serverName: currentServer,
       }).then((res) => { setChannelList(res.data); setShowAddChannel(false) });

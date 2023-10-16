@@ -23,7 +23,7 @@ interface Props {
 const Explore = (props: Props) => {
     const [publicServer, setPublicServer] = useState<Array<T>>();
     useEffect(() => {
-        Axios.get(`http://localhost:8000/server/getPublicServer`)
+        Axios.get(`https://juschat.onrender.com/server/getPublicServer`)
             .then((res) => setPublicServer(res.data))
             .catch((err) => console.log(err))
     }, []);
@@ -51,7 +51,7 @@ const Explore = (props: Props) => {
                                 <p className="ml-4 p-2 border border-green-400 rounded-lg text-green-400">Dicussion</p>
                             </div>
                             <button onClick={() => {
-                                Axios.post("http://localhost:8000/joinedServer/new", {
+                                Axios.post("https://juschat.onrender.com/joinedServer/new", {
                                     email: props.user.email,
                                     ServerName: name,
                                     ServerImage: img,

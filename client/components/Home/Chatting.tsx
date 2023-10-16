@@ -30,7 +30,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
     e.preventDefault();
     socket.emit("sendMessage", { message: message, username: user.name, pfp: user.profilepic });
     setChats(prevState => [...prevState, { message: message, username: user.name, pfp: user.profilepic }]);
-    Axios.post("http://localhost:8000/chats/new", {//currentServer, currentChannel, username, message, pfp
+    Axios.post("https://juschat.onrender.com/chats/new", {//currentServer, currentChannel, username, message, pfp
       currentServer: currentServer,
       currentChannel: currentChannel,
       username: user.name,
@@ -44,7 +44,7 @@ const Chatting: FC<Props> = ({ currentChannel, currentServer, user }) => {
     if (currentChannel && currentServer) {
       setChats([]);
       socket.emit("joinChannel", { currentChannel: currentChannel, currentServer: currentServer })
-      Axios.get(`http://localhost:8000/chats/list?currentServer=${currentServer}&currentChannel=${currentChannel}`)
+      Axios.get(`https://juschat.onrender.com/chats/list?currentServer=${currentServer}&currentChannel=${currentChannel}`)
         .then((res) => {
           setChats(res.data);
           setInputVal("");

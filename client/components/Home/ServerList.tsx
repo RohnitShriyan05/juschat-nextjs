@@ -19,7 +19,7 @@ const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChanne
   const [serverList, setServerList] = useState<Array<serverListType>>([]);
   useEffect(() => {
     if(email){
-      Axios.get(`http://localhost:8000/joinedServer/getList?email=${email}`)
+      Axios.get(`https://juschat.onrender.com/joinedServer/getList?email=${email}`)
       .then((res) => {
         setServerList(res.data);
       })

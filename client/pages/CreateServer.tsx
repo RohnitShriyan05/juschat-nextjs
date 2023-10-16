@@ -23,7 +23,7 @@ const CreateServer = (props: Props) => {
   const [advOpt, setAdvOpt] = useState<boolean>(false);
   const HandleCreateServer = (e:any) => {
     e.preventDefault();
-    Axios.post("http://localhost:8000/server/new", {
+    Axios.post("https://juschat.onrender.com/server/new", {
       publicServer: publicServer,
       name: serverName,
       description: desc,
@@ -32,7 +32,7 @@ const CreateServer = (props: Props) => {
       ownerEmail: props.user.email,
       memberPermision: memPerm
     }).catch((err: any) => console.log(err));
-    Axios.post("http://localhost:8000/joinedServer/new", {
+    Axios.post("https://juschat.onrender.com/joinedServer/new", {
       email: props.user.email,
       ServerName: serverName,
       ServerImage: img,
