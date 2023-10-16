@@ -5,7 +5,7 @@ import { AiOutlineGif } from "react-icons/ai";
 import Image from "next/image";
 import * as io from "socket.io-client";
 import Axios from "axios";
-const socket = io.connect("http://localhost:8000")
+const socket = io.connect("https://juschat.onrender.com/")
 type Props = {
   currentChannel: string;
   currentServer: string;
