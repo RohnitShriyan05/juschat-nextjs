@@ -9,14 +9,13 @@ require("dotenv").config();
 const serverRoute = require("./routes/Server");
 const joinedServerRoute = require("./routes/joinedServers");
 const chatsRoute = require("./routes/Chats");
-app.use(cors({ origin: "https://juschat-nextjs.vercel.app/" }));
+app.use(cors());
 app.use(express.json());
 
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "https://juschat-nextjs.vercel.app/",
     methods: ["GET", "POST"]
   }
 })
