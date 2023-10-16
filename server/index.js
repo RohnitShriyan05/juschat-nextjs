@@ -4,6 +4,7 @@ const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
 const mongoose = require("mongoose");
+require("dotenv").config();
 //Routes Import
 const serverRoute = require("./routes/Server");
 const joinedServerRoute = require("./routes/joinedServers");
@@ -41,7 +42,7 @@ io.on("connection", (socket) => {
 
 
 mongoose
-  .connect("mongodb+srv://rohnitshriyan:rohnitvs@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority", {})
+  .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority`, {})
   .then(() => console.log("Connected to MongoDB database"))
   .catch((err) => console.error("Failed to connect to MongoDB database", err));
 
@@ -52,5 +53,4 @@ app.use("/chats", chatsRoute);
 app.get("/", (req, res) => {
   res.send("hello");
 });
-
-server.listen(8000, () => console.log("url: http://localhost:8000/"));
+server.listen(process.env.PORT, () => console.log("url: http://localhost:8000/"));
