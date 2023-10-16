@@ -9,7 +9,7 @@ require("dotenv").config();
 const serverRoute = require("./routes/Server");
 const joinedServerRoute = require("./routes/joinedServers");
 const chatsRoute = require("./routes/Chats");
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "https://juschat-nextjs.vercel.app/" }));
 app.use(express.json());
 
 
