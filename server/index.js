@@ -41,7 +41,7 @@ io.on("connection", (socket) => {
 
 
 mongoose
-  .connect(`mongodb+srv://${process.env.USER}:${process.env.PASS}@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority`, {})
+  .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority`, {})
   .then(() => console.log("Connected to MongoDB database"))
   .catch((err) => console.error("Failed to connect to MongoDB database", err));
 
