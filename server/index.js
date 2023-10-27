@@ -37,12 +37,19 @@ io.on("connection", (socket) => {
 
 })
 
-
+function loadingComplete(){
+  app.get("/checkLoading",(req,res)=>{
+    res({loadingStatus: "complete"});
+  });
+}
 
 
 mongoose
   .connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.weq1x.mongodb.net/JusChat?retryWrites=true&w=majority`, {})
-  .then(() => console.log("Connected to MongoDB database"))
+  .then(() => {
+    console.log("Connected to MongoDB database");
+    loadingComplete();
+  })
   .catch((err) => console.error("Failed to connect to MongoDB database", err));
 
 
