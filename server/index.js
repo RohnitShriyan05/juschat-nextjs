@@ -39,7 +39,7 @@ io.on("connection", (socket) => {
 
 function loadingComplete(){
   app.get("/checkLoading",(req,res)=>{
-    res.send({loadingStatus: false});
+    res.send(false);
   });
 }
 

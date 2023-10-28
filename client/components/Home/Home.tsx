@@ -15,16 +15,18 @@ type Props = {
     setUser: React.Dispatch<React.SetStateAction<any>>
 };
 type T = {
-    loadingStatus: string
+    res:{
+        loadingStatus: boolean
+    }
 }
 const HomePg: React.FC<Props> =({user, setUser})=> {
     const [currentServer, setCurrentServer] = useState<string>("");
     const [currentChannel, setCurrentChannel] = useState<string>("Select a Channnel");
     const [loading, setLoading] = useState<boolean>(true);
     useEffect(()=>{
-        Axios.get<T>("https://juschat.onrender.com/checkLoading").then((res)=>{
-            if(res.loadingStatus == "complete")setLoading(false);
-            else setLoading(true);
+        Axios.get("https://juschat.onrender.com/checkLoading")
+        .then((res)=>{
+            setLoading(res.data);
         })
     },[])
     return(
