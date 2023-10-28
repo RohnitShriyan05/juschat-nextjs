@@ -13,7 +13,7 @@ interface Props {
 
 const Home = (props: Props) => {
   return (
-    <div className="">
+    <div className="absolute h-full w-full">
       <HomePg
         user={props.user}
         setUser={props.setUser}
