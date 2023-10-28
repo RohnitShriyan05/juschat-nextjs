@@ -11,7 +11,7 @@ interface User {
 export default function App({ Component, pageProps }: AppProps) {
   const [user, setUser] = useState<User>();
   return (
-    <div className="h-screen w-full">
+    <div className="h-full w-full">
       
       {
                 user ?
