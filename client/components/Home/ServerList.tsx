@@ -10,18 +10,20 @@ type Props = {
   email: string 
   setCurrentServer: React.Dispatch<React.SetStateAction<any>>;
   setCurrentChannel: React.Dispatch<React.SetStateAction<any>>;
+  setLoading: React.Dispatch<React.SetStateAction<any>>;
 };
 type serverListType = {
   ServerName: string;
   ServerImage: string;
 };
-const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChannel }) => {
+const ServerList: React.FC<Props> = ({ email, setCurrentServer, setCurrentChannel, setLoading }) => {
   const [serverList, setServerList] = useState<Array<serverListType>>([]);
   useEffect(() => {
     if(email){
       Axios.get(`https://juschat.onrender.com/joinedServer/getList?email=${email}`)
       .then((res) => {
         setServerList(res.data);
+        setLoading(false);
       })
       .catch();
     }
